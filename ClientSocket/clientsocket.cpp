@@ -1,6 +1,7 @@
 #include "clientsocket.h"
 
-ClientSocket::ClientSocket(const QString &ip, uint port) :
+ClientSocket::ClientSocket(Widget *widget, const QString &ip, uint port) :
+    widget(widget),
     socket(new QTcpSocket(this))
 {
     connect(socket, &QTcpSocket::readyRead, this, &ClientSocket::readMessage);
@@ -29,6 +30,7 @@ void ClientSocket::readMessage()
             QString str;
             in >> str;
             nextBlockSize = 0;
+            widget->chatBrowserAppend(str);
         }
     }
     else {
@@ -50,5 +52,5 @@ void ClientSocket::sendToServer(const QString &str)
 void ClientSocket::socketError(QAbstractSocket::SocketError err)
 {
     Q_UNUSED(err)
-
+    widget->chatBrowserAppend(socket->errorString());
 }

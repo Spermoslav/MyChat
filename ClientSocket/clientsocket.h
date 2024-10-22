@@ -2,19 +2,23 @@
 #define CLIENTSOCKET_H
 
 #include <QTcpSocket>
+#include "widget.h"
 
 class ClientSocket : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientSocket(const QString& ip, uint port);
+    explicit ClientSocket(Widget* widget, const QString& ip, uint port);
+
+    void sendToServer(const QString& str);
 
 private slots:
     void readMessage();
-    void sendToServer(const QString& str);
     void socketError(QAbstractSocket::SocketError err);
 
 private:
+    Widget* widget;
+
     QTcpSocket *socket;
     QByteArray data;
     quint16 nextBlockSize{0};
