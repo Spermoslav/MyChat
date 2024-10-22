@@ -49,6 +49,12 @@ target_link_libraries(MyChat PRIVATE
     Qt${QT_VERSION_MAJOR}::Network
 )
 
+target_include_directories(MyChat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+include_directories(
+    ClientSocket
+)
+
 set_target_properties(MyChat PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
