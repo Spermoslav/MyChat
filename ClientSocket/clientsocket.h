@@ -3,11 +3,18 @@
 
 #include <QTcpSocket>
 
-class ClientSocket : public QTcpSocket
+class ClientSocket : public QObject
 {
     Q_OBJECT
 public:
-    ClientSocket();
+    explicit ClientSocket(const QString& ip, uint port);
+
+private slots:
+    void sendToServer(const QString& str);
+    QTcpSocket *socket;
+    QByteArray data;
+    quint16 nextBlockSize{0};
+
 };
 
 #endif // CLIENTSOCKET_H
