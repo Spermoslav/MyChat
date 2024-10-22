@@ -9,6 +9,7 @@
 
 #define MESSAGESENDPB_COLOR_NORMAL "200, 200, 200"
 #define MESSAGESENDPB_COLOR_TAP    "150, 150, 150"
+#define CHATBROWSER_COLOR "224, 255, 255"
 
 class Widget : public QWidget
 {
