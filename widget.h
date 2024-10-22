@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QTime>
 
 #define MESSAGESENDPB_COLOR_NORMAL "200, 200, 200"
 #define MESSAGESENDPB_COLOR_TAP    "150, 150, 150"
@@ -22,7 +23,7 @@ public:
     ~Widget();
 
     inline void chatBrowserAppend(const QString& text)
-                    { chatBrowser->append(text); }
+                    { chatBrowser->append(QTime::currentTime().toString() + " " + text); }
 
 private slots:
     void messageSendPBReleased();

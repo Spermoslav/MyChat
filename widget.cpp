@@ -7,7 +7,7 @@ Widget::Widget(QWidget *parent)
       messageEdit(new QLineEdit),
       messageSendPB(new QPushButton("send message")),
       mainLay(new QVBoxLayout(this)),
-      clientSocket(new ClientSocket("78.81.157.245", 1234))
+      clientSocket(new ClientSocket(this, "78.81.157.245", 1234))
 {
     mainLay->addWidget(chatBrowser);
     mainLay->addWidget(messageEdit);
@@ -35,7 +35,7 @@ void Widget::messageSendPBPressed()
 {
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_TAP) + ");");
     if(messageEdit->text().size() != 0)
-        chatBrowser->append(messageEdit->text());
+        clientSocket->sendToServer(messageEdit->text());
 
     messageEdit->clear();
 }
