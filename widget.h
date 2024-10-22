@@ -19,6 +19,9 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    inline void chatBrowserAppend(const QString& text)
+                    { chatBrowser->append(text); }
+
 private slots:
     void messageSendPBReleased();
     void messageSendPBPressed();
