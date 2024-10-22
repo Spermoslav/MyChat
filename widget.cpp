@@ -12,6 +12,7 @@ Widget::Widget(QWidget *parent)
     mainLay->addWidget(messageSendPB);
 
     chatBrowser->setStyleSheet("background-color: rgb(" + QString(CHATBROWSER_COLOR) + ");");
+    chatBrowser->setFontPointSize(14);
 
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_NORMAL) + ");");
     connect(messageSendPB, &QPushButton::released, this, &Widget::messageSendPBReleased);
