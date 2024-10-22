@@ -32,5 +32,8 @@ void Widget::messageSendPBReleased()
 void Widget::messageSendPBPressed()
 {
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_TAP) + ");");
+    if(messageEdit->text().size() != 0)
+        chatBrowser->append(messageEdit->text());
+
     messageEdit->clear();
 }
