@@ -11,6 +11,8 @@
 #define MESSAGESENDPB_COLOR_TAP    "150, 150, 150"
 #define CHATBROWSER_COLOR "224, 255, 255"
 
+class ClientSocket;
+
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -31,6 +33,8 @@ private:
     QLineEdit* messageEdit;
     QPushButton* messageSendPB;
     QVBoxLayout* mainLay;
+
+    ClientSocket* clientSocket;
 
 };
 #endif // WIDGET_H

@@ -1,11 +1,13 @@
 #include "widget.h"
+#include "clientsocket.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
       chatBrowser(new QTextBrowser),
       messageEdit(new QLineEdit),
       messageSendPB(new QPushButton("send message")),
-      mainLay(new QVBoxLayout(this))
+      mainLay(new QVBoxLayout(this)),
+      clientSocket(new ClientSocket("78.81.157.245", 1234))
 {
     mainLay->addWidget(chatBrowser);
     mainLay->addWidget(messageEdit);

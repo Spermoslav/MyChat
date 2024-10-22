@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
         main.cpp
         widget.cpp
         widget.h
+        ClientSocket/clientsocket.h
+        ClientSocket/clientsocket.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -45,6 +47,12 @@ endif()
 target_link_libraries(MyChat PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Network
+)
+
+target_include_directories(MyChat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+include_directories(
+    ClientSocket
 )
 
 set_target_properties(MyChat PROPERTIES
