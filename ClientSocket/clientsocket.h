@@ -10,7 +10,11 @@ public:
     explicit ClientSocket(const QString& ip, uint port);
 
 private slots:
+    void readMessage();
     void sendToServer(const QString& str);
+    void socketError(QAbstractSocket::SocketError err);
+
+private:
     QTcpSocket *socket;
     QByteArray data;
     quint16 nextBlockSize{0};
