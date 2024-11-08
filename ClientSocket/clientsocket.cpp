@@ -16,21 +16,55 @@ void ClientSocket::readMessage()
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_6_2);
     if(in.status() == QDataStream::Ok) {
-        for(;;) {
-            if(nextBlockSize == 0) {
-                if(socket->bytesAvailable() < 2)
-                    break;
 
-                in >> nextBlockSize;
+        if(nextBlockSize == 0) {
+            if(socket->bytesAvailable() < 2)
+                return;
+
+            in >> nextBlockSize;
+        }
+
+        if(socket->bytesAvailable() < nextBlockSize)
+            return;
+
+        nextBlockSize = 0;
+
+        Data d;
+        in >> d.type;
+        in >> d.text;
+
+        switch (d.type) {
+        case Message: {
+            auto ms = accMessageSplit(d.text);
+                widget->chatBrowserAppend(ms.first, ms.second);
             }
+            break;
 
-            if(socket->bytesAvailable() < nextBlockSize)
-                break;
+        case Info:
+            widget->chatBrowserAppendInfo(d.text);
+            break;
 
-            QString str;
-            in >> str;
-            nextBlockSize = 0;
-            widget->chatBrowserAppend(str);
+        case Login:
+            if(d.text == "n") {
+                widget->authFault(d);
+            }
+            else if(d.text == "p") {
+                widget->authFault(d);
+            }
+            else {
+                widget->authSucces(d);
+            }
+            break;
+
+        case Registration:
+            qDebug() << d.text;
+            if(d.text == "e") {
+                widget->authFault(Data("e", Registration));
+            }
+            else {
+                widget->authSucces(d);
+            }
+            break;
         }
     }
     else {
