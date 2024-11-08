@@ -22,3 +22,13 @@ struct Data
     QString text;
     DataType type;
 };
+
+void clearAccLog();
+
+void writeAccLog(const QString& nick);
+
+[[nodiscard]] QString readAccLog();
+
+[[nodiscard]] std::pair<QString, QString> accMessageSplit(const QString &accData);
+
+#endif // DATA_H
