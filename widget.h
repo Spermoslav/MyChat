@@ -37,6 +37,9 @@ public:
     ~Widget();
 
     void sendAuthAccount(const Data& accData);
+
+    void authFault(const Data& accData);
+    void authSucces(const Data &accData);
     inline void chatBrowserAppendInfo(const QString& text)
                     { chatBrowser->append(QTime::currentTime().toString() + " " + text); }
 

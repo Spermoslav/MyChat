@@ -29,10 +29,20 @@ Widget::~Widget()
 {
 }
 
-void Widget::messageSendPBReleased()
+void Widget::authSucces(const Data &accData)
 {
-    messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_NORMAL) + ");");
+    auto dataSplit = accMessageSplit(accData.text);
+    writeAccLog(dataSplit.first);
+    nickName = dataSplit.first;
 
+    auth->hide();
+
+    if(accData.type == Login) {
+        chatBrowserAppendInfoAll(dataSplit.first + " подключился");
+    }
+    else {
+        chatBrowserAppendInfoAll(dataSplit.first + " зарегался");
+    }
 }
 
 void Widget::messageSendPBPressed()
@@ -45,3 +55,6 @@ void Widget::messageSendPBPressed()
 }
 void Widget::sendAuthAccount(const Data &accData)
     { clientSocket->sendToServer(accData); }
+
+void Widget::authFault(const Data &accData)
+    { auth->authFault(accData); }
