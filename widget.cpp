@@ -23,6 +23,8 @@ Widget::Widget(QWidget *parent)
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_NORMAL) + ");");
     connect(messageSendPB, &QPushButton::released, this, &Widget::messageSendPBReleased);
     connect(messageSendPB, &QPushButton::pressed, this, &Widget::messageSendPBPressed);
+    QDir d = QDir::current();
+    d.mkdir("Data");
 }
 
 Widget::~Widget()
