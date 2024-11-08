@@ -96,6 +96,13 @@ void Widget::resizeEvent(QResizeEvent *e)
     }
 #endif
 }
+
+void Widget::keyPressEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return)
+        messageSendPBPressed();
+}
+
 void Widget::sendAuthAccount(const Data &accData)
     { clientSocket->sendToServer(accData); }
 
@@ -104,3 +111,6 @@ void Widget::authFault(const Data &accData)
 
 void Widget::chatBrowserAppendInfoAll(const QString &text)
     { clientSocket->sendToServer(Data(text, Info)); }
+
+void Widget::messageSendPBReleased()
+    { messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_NORMAL) + ");"); }
