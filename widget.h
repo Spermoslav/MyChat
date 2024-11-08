@@ -53,6 +53,8 @@ private slots:
     void messageSendPBReleased();
     void messageSendPBPressed();
     void logOutPBClicked();
+    void resizeEvent(QResizeEvent* e) override;
+
 
 private:
     QTextBrowser* chatBrowser;

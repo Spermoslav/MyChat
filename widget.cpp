@@ -87,6 +87,15 @@ void Widget::logOutPBClicked()
         auth->show();
     }
 }
+
+void Widget::resizeEvent(QResizeEvent *e)
+{
+#ifndef AUTH_HIDE
+    if(auth) {
+        auth->resize(size());
+    }
+#endif
+}
 void Widget::sendAuthAccount(const Data &accData)
     { clientSocket->sendToServer(accData); }
 
