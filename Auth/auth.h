@@ -66,3 +66,62 @@ private:
     QPushButton* regSubmitPB;
     QPushButton* loginSubmitPB;
 };
+
+class Auth : public QGroupBox
+{
+    Q_OBJECT
+public:
+    explicit Auth(EnterAccount* parent);
+
+    virtual void nicknameFault(NicknameErrorType t = Wrong) = 0;
+
+private slots:
+    void resizeEvent(QResizeEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
+
+    virtual void submitPBReleased() = 0;
+    virtual void submitPBPressed()  = 0;
+
+    inline void backPBClicked() { hide(); }
+
+protected:
+    EnterAccount* parent;
+
+    QLabel* infoNickNameL;
+    QLabel* infoPasswordL;
+
+    QLineEdit* editNickNameLE;
+    QLineEdit* editPasswordLE;
+
+    QPushButton* submitPB;
+    QPushButton* backPB;
+};
+
+class Reg : public Auth
+{
+    Q_OBJECT
+public:
+    explicit Reg(EnterAccount* parent);
+
+    void nicknameFault(NicknameErrorType t = Wrong) override;
+
+private slots:
+    void submitPBReleased() override;
+    void submitPBPressed()  override;
+};
+
+class LogIn : public Auth
+{
+    Q_OBJECT
+public:
+    explicit LogIn(EnterAccount* parent);
+
+    void wrongPassword();
+    void nicknameFault(NicknameErrorType t = Wrong) override;
+
+private slots:
+    void submitPBReleased() override;
+    void submitPBPressed()  override;
+};
+
+#endif // AUTH_H
