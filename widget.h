@@ -7,6 +7,11 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QTime>
+#include <QResizeEvent>
+#include <QKeyEvent>
+#include <QString>
+
+#include "data.h"
 
 #define MESSAGESENDPB_COLOR_NORMAL "200, 200, 200"
 #define MESSAGESENDPB_COLOR_TAP    "150, 150, 150"
@@ -21,6 +26,7 @@
 #endif
 
 class ClientSocket;
+class EnterAccount;
 
 class Widget : public QWidget
 {
@@ -30,7 +36,8 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
-    inline void chatBrowserAppend(const QString& text)
+    void sendAuthAccount(const Data& accData);
+    inline void chatBrowserAppendInfo(const QString& text)
                     { chatBrowser->append(QTime::currentTime().toString() + " " + text); }
 
 private slots:

@@ -1,5 +1,9 @@
 #include "widget.h"
 #include "clientsocket.h"
+#include "auth.h"
+#include "data.h"
+
+#include <QDir>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
@@ -39,3 +43,5 @@ void Widget::messageSendPBPressed()
 
     messageEdit->clear();
 }
+void Widget::sendAuthAccount(const Data &accData)
+    { clientSocket->sendToServer(accData); }
