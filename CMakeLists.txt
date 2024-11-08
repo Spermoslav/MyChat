@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         widget.h
         ClientSocket/clientsocket.h
         ClientSocket/clientsocket.cpp
+        DataClass/data.h
+        DataClass/data.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -53,6 +55,7 @@ target_include_directories(MyChat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(
     ClientSocket
+    DataClass
 )
 
 set_target_properties(MyChat PROPERTIES
