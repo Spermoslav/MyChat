@@ -52,11 +52,16 @@ public:
 private slots:
     void messageSendPBReleased();
     void messageSendPBPressed();
+    void logOutPBClicked();
 
 private:
     QTextBrowser* chatBrowser;
+
     QLineEdit* messageEdit;
+
     QPushButton* messageSendPB;
+    QPushButton* logOutPB;
+
     QVBoxLayout* mainLay;
 
     ClientSocket* clientSocket;
