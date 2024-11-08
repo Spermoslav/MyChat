@@ -42,6 +42,10 @@ public:
     void authSucces(const Data &accData);
 
     void chatBrowserAppendInfoAll(const QString& text);
+
+    inline void chatBrowserAppend(const QString& nick, const QString& text)
+                    { chatBrowser->append(QTime::currentTime().toString() + " " + nick + ": " + text); }
+
     inline void chatBrowserAppendInfo(const QString& text)
                     { chatBrowser->append(QTime::currentTime().toString() + " " + text); }
 
@@ -56,6 +60,8 @@ private:
     QVBoxLayout* mainLay;
 
     ClientSocket* clientSocket;
+
+    QString nickName = "not";
 
 };
 #endif // WIDGET_H
