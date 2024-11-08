@@ -12,6 +12,14 @@
 #define MESSAGESENDPB_COLOR_TAP    "150, 150, 150"
 #define CHATBROWSER_COLOR "224, 255, 255"
 
+//#define DEBUG
+#ifdef DEBUG
+//    #define AUTH_HIDE
+    #ifndef AUTH_HIDE
+        #define AUTH_SHOW
+    #endif
+#endif
+
 class ClientSocket;
 
 class Widget : public QWidget
