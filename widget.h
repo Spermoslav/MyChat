@@ -63,5 +63,6 @@ private:
 
     QString nickName = "not";
 
+    EnterAccount* auth{nullptr};
 };
 #endif // WIDGET_H

@@ -25,6 +25,20 @@ Widget::Widget(QWidget *parent)
     connect(messageSendPB, &QPushButton::pressed, this, &Widget::messageSendPBPressed);
     QDir d = QDir::current();
     d.mkdir("Data");
+
+#ifndef AUTH_HIDE
+    #ifdef AUTH_SHOW
+        auth = new EnterAccount(this);
+    #else
+        if(readAccLog() == "") {
+            auth = new EnterAccount(this);
+        }
+        else {
+            nickName = readAccLog();
+            chatBrowserAppendInfoAll(nickName + " подключился");
+     }
+    #endif
+#endif
 }
 
 Widget::~Widget()
@@ -51,7 +65,7 @@ void Widget::messageSendPBPressed()
 {
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_TAP) + ");");
     if(messageEdit->text().size() != 0)
-        clientSocket->sendToServer(messageEdit->text());
+        clientSocket->sendToServer(nickName + ' ' + messageEdit->text());
 
     messageEdit->clear();
 }
