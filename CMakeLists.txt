@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         widget.h
         ClientSocket/clientsocket.h
         ClientSocket/clientsocket.cpp
+        Auth/auth.h
+        Auth/auth.cpp
         DataClass/data.h
         DataClass/data.cpp
 )
@@ -55,6 +57,7 @@ target_include_directories(MyChat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(
     ClientSocket
+    Auth
     DataClass
 )
 
