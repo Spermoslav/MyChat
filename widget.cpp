@@ -60,3 +60,6 @@ void Widget::sendAuthAccount(const Data &accData)
 
 void Widget::authFault(const Data &accData)
     { auth->authFault(accData); }
+
+void Widget::chatBrowserAppendInfoAll(const QString &text)
+    { clientSocket->sendToServer(Data(text, Info)); }

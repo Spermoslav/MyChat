@@ -40,6 +40,8 @@ public:
 
     void authFault(const Data& accData);
     void authSucces(const Data &accData);
+
+    void chatBrowserAppendInfoAll(const QString& text);
     inline void chatBrowserAppendInfo(const QString& text)
                     { chatBrowser->append(QTime::currentTime().toString() + " " + text); }
 
