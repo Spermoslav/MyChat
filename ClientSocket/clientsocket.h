@@ -3,6 +3,7 @@
 
 #include <QTcpSocket>
 #include "widget.h"
+#include "data.h"
 
 class ClientSocket : public QObject
 {
@@ -10,7 +11,7 @@ class ClientSocket : public QObject
 public:
     explicit ClientSocket(Widget* widget, const QString& ip, uint port);
 
-    void sendToServer(const QString& str);
+    void sendToServer(const Data &ms);
 
 private slots:
     void readMessage();
