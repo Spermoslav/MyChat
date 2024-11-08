@@ -11,7 +11,7 @@ Widget::Widget(QWidget *parent)
       messageEdit(new QLineEdit),
       messageSendPB(new QPushButton("send message")),
       mainLay(new QVBoxLayout(this)),
-      clientSocket(new ClientSocket(this, "178.68.245.171", 1234))
+      clientSocket(new ClientSocket(this, "178.68.247.57", 1234))
 {
     mainLay->addWidget(chatBrowser);
     mainLay->addWidget(messageEdit);
