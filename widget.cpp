@@ -12,7 +12,7 @@ Widget::Widget(QWidget *parent)
       messageSendPB(new QPushButton("send message")),
       logOutPB(new QPushButton("выйти из аккаунта")),
       mainLay(new QVBoxLayout(this)),
-      clientSocket(new ClientSocket(this, "178.68.247.57", 1234))
+      clientSocket(new ClientSocket(this, "178.68.247.70", 1234))
 {
     mainLay->addWidget(chatBrowser);
     mainLay->addWidget(messageEdit);
