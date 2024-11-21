@@ -76,7 +76,7 @@ Widget::~Widget()
 void Widget::authSucces(const Data &accData)
 {
     auto dataSplit = accMessageSplit(accData.text);
-    writeAccLog(dataSplit.first);
+    writeAccInfo(dataSplit.first, dataSplit.second);
     nickName = dataSplit.first;
 
     auth->hide();
