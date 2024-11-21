@@ -12,7 +12,7 @@ Widget::Widget(QWidget *parent)
       messageSendPB(new QPushButton("send message")),
       logOutPB(new QPushButton("выйти из аккаунта")),
       mainLay(new QVBoxLayout(this)),
-      clientSocket(new ClientSocket(this, "178.68.247.70", 1234))
+      clientSocket(new ClientSocket(this))
 {
     mainLay->addWidget(chatBrowser);
     mainLay->addWidget(messageEdit);
@@ -23,9 +23,12 @@ Widget::Widget(QWidget *parent)
     chatBrowser->setFontPointSize(14);
 
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_NORMAL) + ");");
+
     connect(messageSendPB, &QPushButton::released, this, &Widget::messageSendPBReleased);
     connect(messageSendPB, &QPushButton::pressed, this, &Widget::messageSendPBPressed);
     connect(logOutPB, &QPushButton::clicked, this, &Widget::logOutPBClicked);
+    connect(clientSocket, &ClientSocket::connectionFault, this, &Widget::socketError);
+    connect(clientSocket, &ClientSocket::socketConnected, this, &Widget::socketConnected);
 
     QDir d = QDir::current();
     d.mkdir("Data");
