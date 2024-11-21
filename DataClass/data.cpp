@@ -28,8 +28,27 @@ void writeAccInfo(const QString &nick, const QString& pass) {
     }
     dataF.flush();
 }
+
+void writeAdress(const QString &ip, const QString &port)
+{
+    QFile dataF("Data/clientdata.cfg");
+    dataF.open(QIODevice::ReadOnly | QIODevice::Text);
+    QStringList sl = QString::fromLocal8Bit(dataF.readAll()).split(' ');
+
+    dataF.close();
     dataF.open(QIODevice::WriteOnly | QIODevice::Text);
-    dataF.write(QString(nick).toLocal8Bit());
+
+    if(sl.size() < 4) {
+        dataF.write(QString(' ' + ip + ' ' + port).toLocal8Bit());
+    }
+    else if(sl.size() == 4) {
+        dataF.write(QString(sl[0] + ' ' + sl[1] + ' ' + ip + ' ' + port).toLocal8Bit());
+    }
+    else {
+        qDebug() << __FUNCTION__ << "sl.size > 2";
+    }
+    dataF.flush();
+}
 }
 
 QString readAccLog() {

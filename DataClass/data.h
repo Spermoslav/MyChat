@@ -25,7 +25,8 @@ struct Data
 
 void clearAccInfo();
 
-void writeAccLog(const QString& nick);
+void writeAccInfo(const QString& nick, const QString &pass);
+void writeAdress(const QString& ip, const QString& port);
 
 [[nodiscard]] QString readAccLog();
 
