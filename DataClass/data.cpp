@@ -49,18 +49,44 @@ void writeAdress(const QString &ip, const QString &port)
     }
     dataF.flush();
 }
-}
 
-QString readAccLog() {
+InfoPair readAccInfo() {
     QFile dataF("Data/clientdata.cfg");
     dataF.open(QIODevice::ReadOnly | QIODevice::Text);
-    return QString::fromLocal8Bit(dataF.readAll());
+    QStringList sl = QString::fromLocal8Bit(dataF.readAll()).split(' ');
+
+    if(sl[0] == "") return std::nullopt;
+
+    return InfoPair({sl[0], sl[1]});
 }
 
-void clearAccLog() {
+InfoPair readAdress()
+{
     QFile dataF("Data/clientdata.cfg");
+    dataF.open(QIODevice::ReadOnly | QIODevice::Text);
+    QStringList sl = QString::fromLocal8Bit(dataF.readAll()).split(' ');
+
+    if (sl.size() < 4) return std::nullopt;
+    return InfoPair({sl[2], sl[3]});
+}
+
+void clearAccInfo()
+{
+    QFile dataF("Data/clientdata.cfg");
+    dataF.open(QIODevice::ReadOnly | QIODevice::Text);
+    QStringList sl = QString::fromLocal8Bit(dataF.readAll()).split(' ');
+
+    dataF.close();
+    if(sl[0] == "") return;
+
     dataF.open(QIODevice::WriteOnly | QIODevice::Text);
-    dataF.write("");
+
+    if(sl.size() == 2) {
+        dataF.write("");
+    }
+    else {
+        dataF.write(QString(' ' + sl[2] + ' ' + sl[3]).toLocal8Bit());
+    }
     dataF.close();
 }
 
