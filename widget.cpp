@@ -110,7 +110,7 @@ void Widget::messageSendPBPressed()
 
 void Widget::logOutPBClicked()
 {
-    clearAccLog();
+    clearAccInfo();
 
     if(auth) {
         auth->show();
