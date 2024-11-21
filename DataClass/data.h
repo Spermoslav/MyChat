@@ -23,7 +23,7 @@ struct Data
     DataType type;
 };
 
-void clearAccLog();
+void clearAccInfo();
 
 void writeAccLog(const QString& nick);
 

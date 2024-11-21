@@ -1,12 +1,33 @@
 #include "data.h"
+#include <QDebug>
 
 Data &Data::operator+(const QString &oth) {
     text += oth;
     return *this;
 }
 
-void writeAccLog(const QString &nick) {
+void writeAccInfo(const QString &nick, const QString& pass) {
     QFile dataF("Data/clientdata.cfg");
+    dataF.open(QIODevice::ReadOnly | QIODevice::Text);
+    QStringList sl = QString::fromLocal8Bit(dataF.readAll()).split(' ');
+
+    dataF.close();
+    dataF.open(QIODevice::WriteOnly | QIODevice::Text);
+
+    if(sl.size() == 1) {
+        dataF.write(QString(nick + ' ' + pass + ' ').toLocal8Bit());
+    }
+    else if(sl.size() == 3) {
+        dataF.write(QString(nick + ' ' + pass + ' ' + sl[1] + ' ' + sl[2]).toLocal8Bit());
+    }
+    else if(sl.size() == 4) {
+        dataF.write(QString(nick + ' ' + pass + ' ' + sl[2] + ' ' + sl[3]).toLocal8Bit());
+    }
+    else {
+        qDebug() << __FUNCTION__ << "sl.size > 2";
+    }
+    dataF.flush();
+}
     dataF.open(QIODevice::WriteOnly | QIODevice::Text);
     dataF.write(QString(nick).toLocal8Bit());
 }
