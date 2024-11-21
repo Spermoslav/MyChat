@@ -128,6 +128,12 @@ void Widget::resizeEvent(QResizeEvent *e)
     if(auth) {
         auth->resize(size());
     }
+    if(cm) {
+        cm->resize(size());
+    }
+    if(waitConnectionLW) {
+        waitConnectionLW->resize(size());
+    }
 #endif
 }
 
