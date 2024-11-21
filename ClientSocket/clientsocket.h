@@ -21,6 +21,11 @@ public:
 private slots:
     void readMessage();
     void socketError(QAbstractSocket::SocketError err);
+    void socketDisconnected();
+
+signals:
+    void connectionFault(const QString &err);
+    void socketConnected();
 
 private:
     Widget* widget;

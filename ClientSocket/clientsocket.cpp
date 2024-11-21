@@ -91,4 +91,8 @@ void ClientSocket::socketError(QAbstractSocket::SocketError err)
 {
     connectionFault(socket->errorString());
 }
+
+void ClientSocket::socketDisconnected()
+{
+    connectionFault("Соединение потеряно");
 }
