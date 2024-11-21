@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
         ClientSocket/clientsocket.cpp
         Auth/auth.h
         Auth/auth.cpp
+        Auth/connectionmenu.h
+        Auth/connectionmenu.cpp
         DataClass/data.h
         DataClass/data.cpp
         LoadWidget/loadwidget.h
