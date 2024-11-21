@@ -79,7 +79,7 @@ void Widget::authSucces(const Data &accData)
     writeAccInfo(dataSplit.first, dataSplit.second);
     nickName = dataSplit.first;
 
-    auth->hide();
+    if(auth) auth->hide();
 
     if(accData.type == Login) {
         chatBrowserAppendInfoAll(dataSplit.first + " подключился");
