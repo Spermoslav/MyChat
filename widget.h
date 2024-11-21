@@ -12,6 +12,8 @@
 #include <QString>
 
 #include "data.h"
+#include "connectionmenu.h"
+#include "loadwidget.h"
 
 #define MESSAGESENDPB_COLOR_NORMAL "200, 200, 200"
 #define MESSAGESENDPB_COLOR_TAP    "150, 150, 150"
@@ -72,5 +74,9 @@ private:
     QString nickName = "not";
 
     EnterAccount* auth{nullptr};
+
+    ConnectionMenu* cm{nullptr};
+
+    LoadWidget* waitConnectionLW{nullptr};
 };
 #endif // WIDGET_H

@@ -37,15 +37,36 @@ Widget::Widget(QWidget *parent)
     #ifdef AUTH_SHOW
         auth = new EnterAccount(this);
     #else
-        if(readAccLog() == "") {
+
+    InfoPair ap = readAdress();
+    InfoPair aN = readAccInfo();
+
+    if(ap == std::nullopt) {
+        if(aN == std::nullopt) {
             auth = new EnterAccount(this);
         }
         else {
-            nickName = readAccLog();
-            chatBrowserAppendInfoAll(nickName + " подключился");
-     }
+            clientSocket->sendToServer(Data((*aN).first + ' ' + (*aN).second, Login));
+        }
+
+        cm = new ConnectionMenu(static_cast<QWidget*> (this), clientSocket->socket);
+    }
+    else {
+        clientSocket->connectSocket((*ap).first, (*ap).second.toInt());
+        waitConnectionLW = new LoadWidget(this);
+        waitConnectionLW->setAlignment(Qt::AlignCenter);
+        waitConnectionLW->setFont(QFont(waitConnectionLW->font().family(), 15));
+
+        if(aN == std::nullopt) {
+            auth = new EnterAccount(this);
+        }
+        else {
+            clientSocket->sendToServer(Data((*aN).first + ' ' + (*aN).second, Login));
+        }
+    }
     #endif
 #endif
+
 }
 
 Widget::~Widget()
