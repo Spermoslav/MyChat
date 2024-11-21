@@ -33,11 +33,6 @@ Widget::Widget(QWidget *parent)
     QDir d = QDir::current();
     d.mkdir("Data");
 
-#ifndef AUTH_HIDE
-    #ifdef AUTH_SHOW
-        auth = new EnterAccount(this);
-    #else
-
     InfoPair ap = readAdress();
     InfoPair aN = readAccInfo();
 
@@ -64,9 +59,6 @@ Widget::Widget(QWidget *parent)
             clientSocket->sendToServer(Data((*aN).first + ' ' + (*aN).second, Login));
         }
     }
-    #endif
-#endif
-
 }
 
 Widget::~Widget()
@@ -124,7 +116,6 @@ void Widget::logOutPBClicked()
 
 void Widget::resizeEvent(QResizeEvent *e)
 {
-#ifndef AUTH_HIDE
     if(auth) {
         auth->resize(size());
     }
@@ -134,7 +125,6 @@ void Widget::resizeEvent(QResizeEvent *e)
     if(waitConnectionLW) {
         waitConnectionLW->resize(size());
     }
-#endif
 }
 
 void Widget::keyPressEvent(QKeyEvent *e)
