@@ -89,6 +89,6 @@ void ClientSocket::sendToServer(const Data &ms)
 
 void ClientSocket::socketError(QAbstractSocket::SocketError err)
 {
-    Q_UNUSED(err)
-    widget->chatBrowserAppendInfo(socket->errorString());
+    connectionFault(socket->errorString());
+}
 }

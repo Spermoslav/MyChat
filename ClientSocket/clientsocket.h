@@ -14,6 +14,10 @@ public:
 
     void sendToServer(const Data &ms);
 
+    inline void connectSocket(const QString& ip, uint port) noexcept {
+        socket->connectToHost(ip, port);
+    }
+
 private slots:
     void readMessage();
     void socketError(QAbstractSocket::SocketError err);
