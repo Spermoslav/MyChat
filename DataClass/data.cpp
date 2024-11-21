@@ -111,3 +111,19 @@ std::pair<QString, QString> accMessageSplit(const QString &accData)
 
     return std::pair<QString, QString> (nick, mess);
 }
+
+void clearAdress()
+{
+    QFile dataF("Data/clientdata.cfg");
+    dataF.open(QIODevice::ReadOnly | QIODevice::Text);
+    QStringList sl = QString::fromLocal8Bit(dataF.readAll()).split(' ');
+
+    dataF.close();
+    if(sl.size() == 1) return;
+
+    dataF.open(QIODevice::WriteOnly | QIODevice::Text);
+
+    dataF.write(QString(sl[0] + ' ' + sl[1]).toLocal8Bit());
+
+    dataF.close();
+}

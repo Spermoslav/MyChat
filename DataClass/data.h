@@ -24,6 +24,7 @@ struct Data
 };
 
 void clearAccInfo();
+void clearAdress();
 
 void writeAccInfo(const QString& nick, const QString &pass);
 void writeAdress(const QString& ip, const QString& port);
