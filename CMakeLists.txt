@@ -23,6 +23,8 @@ set(PROJECT_SOURCES
         Auth/auth.cpp
         DataClass/data.h
         DataClass/data.cpp
+        LoadWidget/loadwidget.h
+        LoadWidget/loadwidget.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -59,6 +61,7 @@ include_directories(
     ClientSocket
     Auth
     DataClass
+    LoadWidget
 )
 
 set_target_properties(MyChat PROPERTIES
