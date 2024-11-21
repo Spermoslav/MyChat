@@ -10,7 +10,7 @@ class ClientSocket : public QObject
     friend class Widget;
     Q_OBJECT
 public:
-    explicit ClientSocket(Widget* widget, const QString& ip, uint port);
+    explicit ClientSocket(Widget* widget);
 
     void sendToServer(const Data &ms);
 

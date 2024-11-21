@@ -1,14 +1,13 @@
 #include "clientsocket.h"
 
-ClientSocket::ClientSocket(Widget *widget, const QString &ip, uint port) :
+ClientSocket::ClientSocket(Widget *widget) :
     widget(widget),
     socket(new QTcpSocket(this))
 {
     connect(socket, &QTcpSocket::readyRead, this, &ClientSocket::readMessage);
-    connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
+    connect(socket, &QTcpSocket::connected, this, &ClientSocket::socketConnected);
+    connect(socket, &QTcpSocket::disconnected, this, &ClientSocket::socketDisconnected);
     connect(socket, &QTcpSocket::errorOccurred, this, &ClientSocket::socketError);
-    socket->connectToHost(ip, port);
-    socket->waitForConnected();
 }
 
 void ClientSocket::readMessage()
