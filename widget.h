@@ -60,6 +60,8 @@ private slots:
     void keyPressEvent(QKeyEvent* e) override;
 
     void socketConnected();
+    void socketError(const QString &err);
+
 private:  
     QTextBrowser* chatBrowser;
 

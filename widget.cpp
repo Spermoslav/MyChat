@@ -150,6 +150,26 @@ void Widget::socketConnected()
         delete waitConnectionLW;
     }
 }
+
+void Widget::socketError(const QString& err)
+{
+    if(auth) {
+        auth->show();
+    }
+    else {
+        auth = new EnterAccount(this);
+        auth->resize(size());
+    }
+    if(cm) {
+        cm->show();
+    }
+    else {
+        cm = new ConnectionMenu(this, clientSocket->socket);
+        cm->resize(size());
+        cm->writeError(err);
+    }
+}
+
 void Widget::sendAuthAccount(const Data &accData)
     { clientSocket->sendToServer(accData); }
 
