@@ -89,6 +89,16 @@ void Widget::authSucces(const Data &accData)
     }
 }
 
+void Widget::authFault(const Data &accData)
+{
+    if(auth) auth->authFault(accData);
+    else {
+        auth = new EnterAccount(this);
+        auth->resize(size());
+        auth->show();
+    }
+}
+
 void Widget::messageSendPBPressed()
 {
     messageSendPB->setStyleSheet("background-color: rgb(" + QString(MESSAGESENDPB_COLOR_TAP) + ");");
@@ -129,9 +139,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
 void Widget::sendAuthAccount(const Data &accData)
     { clientSocket->sendToServer(accData); }
-
-void Widget::authFault(const Data &accData)
-    { auth->authFault(accData); }
 
 void Widget::chatBrowserAppendInfoAll(const QString &text)
     { clientSocket->sendToServer(Data(text, Info)); }
