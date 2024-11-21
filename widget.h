@@ -59,7 +59,8 @@ private slots:
 
     void keyPressEvent(QKeyEvent* e) override;
 
-private:
+    void socketConnected();
+private:  
     QTextBrowser* chatBrowser;
 
     QLineEdit* messageEdit;

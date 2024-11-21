@@ -143,6 +143,13 @@ void Widget::keyPressEvent(QKeyEvent *e)
         messageSendPBPressed();
 }
 
+void Widget::socketConnected()
+{
+    if(waitConnectionLW) {
+        waitConnectionLW->stop();
+        delete waitConnectionLW;
+    }
+}
 void Widget::sendAuthAccount(const Data &accData)
     { clientSocket->sendToServer(accData); }
 
